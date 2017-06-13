@@ -7,24 +7,8 @@ import java.util.*;
  */
 public enum CarVariable {
 
-	/**
-	 * Default constructor
-	 */
-	public CarVariable() {
-	}
-
-	/**
-     * 
-     */
-    private enum name;
-
-    /**
-     * 
-     */
-    private String value;
+	name
 
 }
 
-public enum Type {
-	Restaurante, Iglesia
-}
+

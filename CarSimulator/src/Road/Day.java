@@ -1,26 +1,25 @@
 package Road;
 
+import java.awt.image.BufferedImage;
 import java.util.*;
 
 /**
  * 
  */
 public class Day extends Obstacle {
-
-	/**
-	 * Default constructor
-	 */
-	public Day() {
+	private boolean day;
+	private boolean night;
+	public Day(boolean bday,boolean bnight){
+		day=bday;
+		night=bnight;
+	}
+	public void Build(int[][] map){
+		FabricaPista build = new FabricaPista();
+		int[] add = {6,0,0,0,0,0,6};
+		build.addElement(map, add);
 	}
 
-	/**
-	 * 
-	 */
-	private bool day;
 
-	/**
-	 * 
-	 */
-	private bool night;
+
 
 }
