@@ -14,7 +14,7 @@ public class Day extends Obstacle {
 		night=bnight;
 	}
 	public void Build(int[][] map){
-		FabricaPista build = new FabricaPista();
+		PistaTools build = new PistaTools();
 		int[] add = {6,0,0,0,0,0,6};
 		build.addElement(map, add);
 	}
