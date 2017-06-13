@@ -12,7 +12,7 @@ public class Final extends Obstacle {
 	 * Default constructor
 	 */
 	public void Build(int[][] map){
-		FabricaPista build = new FabricaPista();
+		PistaTools build = new PistaTools();
 		int[] add = {4,4,4,4,4,4,4};
 		build.addElement(map, add);
 	}
