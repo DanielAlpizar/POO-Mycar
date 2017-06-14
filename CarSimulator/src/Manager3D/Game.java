@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -64,8 +65,16 @@ public class Game extends JFrame implements Runnable{
 			createBufferStrategy(3);
 			return;
 		}
-		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
+		Graphics screenG = bs.getDrawGraphics();
+
+		screenG.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
+		try {
+			PlayerHUD hud = new PlayerHUD(screenG);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		bs.show();
 	}
 	public void run() {

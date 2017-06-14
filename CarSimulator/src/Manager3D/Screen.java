@@ -18,6 +18,7 @@ public class Screen {
 	}
 	
 	public int[] update(Camera camera, int[] pixels) {
+	
 		for(int n=0; n<pixels.length/2; n++) {
 			if(pixels[n] != sky.getRGB()) pixels[n] = sky.getRGB();
 		}
