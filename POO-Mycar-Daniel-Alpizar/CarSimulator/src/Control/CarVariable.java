@@ -2,13 +2,9 @@ package Control;
 
 import java.util.*;
 
-public enum CarVariable {
+public class CarVariable {
 
-    private enum name;
+    private CarMetrics name;
     private String value;
 
-}
-
-public enum Type {
-	Restaurante, Iglesia
 }

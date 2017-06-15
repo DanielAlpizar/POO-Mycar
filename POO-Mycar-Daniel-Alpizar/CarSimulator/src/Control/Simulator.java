@@ -16,7 +16,7 @@ public class Simulator {
     	
     }
     
-    public void freno(int speed) {
+    public void breack(int speed) {
     	
     }
     

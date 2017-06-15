@@ -4,15 +4,18 @@ import java.util.*;
 
 public class Direction extends System {
 	
-	private boolean turnLeft;
-	private boolean turnRight;
-	private int degrees;
+	private boolean TurnLeft;
+	private boolean TurnRight;
+	private int Degrees;
 
 	public Direction() {
 	}
 
-	public void turn(int degrees){
+	public void turnLeft(int pDegrees){
 		
 	}
-
+	
+public void turnRight(int pDegrees){
+		
+	}
 }

@@ -22,8 +22,6 @@ public class System {
 	
     public ArrayList returnActualValues() {
 		return null;
-    	
-    	
     }
 
 }
