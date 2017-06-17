@@ -10,7 +10,7 @@ import Tools.FileManager;
  */
 public class Road {
 
-	public ArrayList<Obstacle> itemsinroad = new ArrayList();
+	private ArrayList<Obstacle> itemsinroad = new ArrayList();
 
 	public void chargeRoad(File archive) {
 		String Textroad;
@@ -22,27 +22,31 @@ public class Road {
 		while (indexletter != Textroad.length()) {
 			char letter = Textroad.charAt(indexletter);
 			if (factory.getShape(Character.toString(letter)) != null) {
-				itemsinroad.add(factory.getShape(Textroad));
+				Obstacle piece = factory.getShape(Character.toString(letter));
+				itemsinroad.add(piece);
 
-			} else if (Character.toString(letter) == "m" || Character.toString(letter) == "M") {
+			} 
+			else if (Character.toString(letter).equals("m") || Character.toString(letter).equals("M")) {
 				int interindex = 1;
 				char inletter = Textroad.charAt(indexletter + interindex);
 				String speed = "";
 
-				while (Character.isDigit(inletter)) {
+				while (Character.isDigit(inletter)&&Textroad.length()-1!=interindex){
 					speed += Character.toString(inletter);
 					interindex++;
 					inletter = Textroad.charAt(indexletter + interindex);
 				}
+				speed += Character.toString(inletter);
+
 				SpeedLimit speedlimit = (SpeedLimit) factory.getShape("S");
-				if (Character.toString(letter) == "m") {
+				if (Character.toString(letter).equals("m")) {
 					int min = Integer.valueOf(speed);
 					speedlimit.setMinimumSpeed(min);
-					
+
 					itemsinroad.add(speedlimit);
 				}
 
-				else if (Character.toString(letter) == "M") {
+				else if (Character.toString(letter).equals( "M")) {
 					int max = Integer.valueOf(speed);
 					speedlimit.setMaximumSpeed(max);
 					itemsinroad.add(speedlimit);
@@ -50,6 +54,7 @@ public class Road {
 				indexletter = +interindex;
 
 			}
+			indexletter++;
 
 		}
 		itemsinroad.add(factory.getShape("F"));
@@ -61,7 +66,7 @@ public class Road {
 	}
 
 	public void repeatRoad() {
-		itemsinroad.remove(itemsinroad.size());
+		itemsinroad.remove(itemsinroad.size() - 1);
 		itemsinroad.addAll(itemsinroad);
 		itemsinroad.add(new Final());
 	}

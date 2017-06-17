@@ -43,8 +43,8 @@ public class PlayerHUD {
 			AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,alpha);
 			graphics2d.setComposite(ac);
 			graphics2d.setColor(Color.white);
-			graphics2d.fillOval(140, 140, 400, 400);
-			
+			graphics2d.fillOval(0, 250, 400, 400);
+			graphics2d.fillOval(250, 250, 400, 400);
 			graphics= (Graphics)graphics2d;
 
 		}

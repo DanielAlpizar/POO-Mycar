@@ -1,17 +1,23 @@
 package Road;
 
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 public class Street extends Obstacle {
-	public void Build(int[][] map){
+	public int[][] Build(int[][] map){
 		PistaTools build = new PistaTools();
+		Random r = new Random();
 		int index = 0;
 		while(index!=4){
-			int[] add = {1,0,0,0,0,0,1};
+			int textureid = r.nextInt(3)+1;
 
-			build.addElement(map, add);
+			int[]add= {textureid,0,0,0,0,0,0,0,0,textureid,textureid,0,0,0,0,0,0,0,0,textureid};
 
+
+			map=build.addElement(map, add);
+			index++;
 		}
+		return map;
 
 	}
 }

@@ -10,11 +10,12 @@ public class Rain extends Obstacle {
 
 	/**
 	 * Default constructor
+	 * @return 
 	 */
-	public void Build(int[][] map){
+	public int[][] Build(int[][] map){
 		PistaTools build = new PistaTools();
-			int[] add = {5,0,0,0,0,0,5};
-			build.addElement(map, add);
+		int[]add= {11,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,11};
+			return map=build.addElement(map, add);
 
 
 		

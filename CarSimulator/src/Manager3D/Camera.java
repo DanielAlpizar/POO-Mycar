@@ -7,8 +7,8 @@ import java.awt.event.KeyListener;
 public class Camera implements KeyListener{
 	public double xPos, yPos, xDir, yDir, xPlane, yPlane;
 	public boolean left, right, forward, back;
-	public final double MOVE_SPEED = .08;
-	public final double ROTATION_SPEED = .045;
+	public final double MOVE_SPEED = .8;
+	public final double ROTATION_SPEED = .02;
 	public Camera(double x, double y, double xd, double yd, double xp, double yp) {
 		xPos = x;
 		yPos = y;
@@ -23,7 +23,6 @@ public class Camera implements KeyListener{
 		if((key.getKeyCode() == KeyEvent.VK_RIGHT))
 			right = true;
 		if((key.getKeyCode() == KeyEvent.VK_UP))
-			System.out.println(xPos);
 			forward = true;
 		if((key.getKeyCode() == KeyEvent.VK_DOWN))
 			back = true;
@@ -68,6 +67,7 @@ public class Camera implements KeyListener{
 			xPlane=xPlane*Math.cos(ROTATION_SPEED) - yPlane*Math.sin(ROTATION_SPEED);
 			yPlane=oldxPlane*Math.sin(ROTATION_SPEED) + yPlane*Math.cos(ROTATION_SPEED);
 		}
+
 	}
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub

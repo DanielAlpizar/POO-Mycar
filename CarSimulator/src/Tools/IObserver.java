@@ -1,10 +1,6 @@
 package Tools;
 
-import java.util.*;
-
-/**
- * 
- */
-public interface IObserver {
-
+public abstract class IObserver {
+   protected Subject subject;
+   public abstract void update();
 }

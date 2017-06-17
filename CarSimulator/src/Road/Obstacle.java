@@ -10,7 +10,8 @@ public class Obstacle {
 
 
 
-	public void Build(int[][] map){	
+	public int[][] Build(int[][] map){
+		return map;	
 	}
 	
 }

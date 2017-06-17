@@ -24,7 +24,7 @@ public class RoadFactory {
 		} else if (ObstacleType.equalsIgnoreCase("F")) {
 			return new Final();
 		}else if (ObstacleType.equalsIgnoreCase("S")) {
-			return new Final();
+			return new SpeedLimit();
 		}
 
 
