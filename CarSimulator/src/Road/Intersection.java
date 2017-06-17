@@ -7,17 +7,54 @@ import java.util.*;
  * 
  */
 public class Intersection extends Obstacle {
-	private int cornerQuantity;
 
-	public void Build(int[][] map){
+	public int[][] Build(int[][] map){
 		PistaTools build = new PistaTools();
 		int index = 0;
-		while(index!=4){
-			int[] add = {2,0,0,0,0,0,2};
+		int count = 0;
+		
+		while(index!=map.length){
+			if(map[index][0]==4){
+				count++;
+			}
+			index++;
+		}
+		count = count/4;
+		
+		
+		if(count%2==0 ||  count ==0){
+			int[]add= {4,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4};
 
-			build.addElement(map, add);
+			map=build.addElement(map, add);
+		}else{
+			int[]add= {4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,4};
+
+
+			map=build.addElement(map, add);
+		}
+		
+		
+		index=0;
+		while(index!=3){
+			int[]add= {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4};
+
+			map=build.addElement(map, add);
+			index++;
 
 		}
+		if(count%2==0 ||  count ==0){
+			int[]add= {4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,4};
+
+
+			map=build.addElement(map, add);
+		}else{
+			int[]add= {4,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4};
+
+			map=build.addElement(map, add);
+		}
+		
+		return map;
+		
 
 	}
 	

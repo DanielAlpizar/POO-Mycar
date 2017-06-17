@@ -10,16 +10,19 @@ public class Cuatrosesquinas extends Obstacle {
 
 	/**
 	 * Default constructor
+	 * @return 
 	 */
-	public void Build(int[][] map){
+	public int[][] Build(int[][] map){
 		PistaTools build = new PistaTools();
 		int index = 0;
 		while(index!=4){
-			int[] add = {3,0,0,0,0,0,3};
+			int[]add= {3,0,0,0,0,0,0,0,0,3,3,0,0,0,0,0,0,0,0,3};
 
-			build.addElement(map, add);
+			map=build.addElement(map, add);
+			index++;
 
 		}
+		return map;
 
 	}
 }

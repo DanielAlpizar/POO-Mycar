@@ -29,5 +29,6 @@ public class SpeedLimit extends Obstacle {
 	public void setMinimumSpeed(int minimumSpeed) {
 		this.minimumSpeed = minimumSpeed;
 	}
+	
 
 }

@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -32,9 +33,9 @@ public class Game extends JFrame implements Runnable{
 		textures = new ArrayList<Texture>();
 		textures.add(Texture.house);
 		textures.add(Texture.brick);
-		textures.add(Texture.bluestone);
-		textures.add(Texture.stone);
-		camera = new Camera(1, 4.5, 1, 0, 0, -.66);
+		textures.add(Texture.house2);
+		textures.add(Texture.wood);
+		camera = new Camera(2, 2, 1, 0, 0, -.66);
 		screen = new Screen(map, mapWidth, mapHeight, textures, 640, 480);
 		addKeyListener(camera);
 		setSize(640, 480);
@@ -64,8 +65,16 @@ public class Game extends JFrame implements Runnable{
 			createBufferStrategy(3);
 			return;
 		}
-		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
+		Graphics screenG = bs.getDrawGraphics();
+
+		screenG.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
+		try {
+			PlayerHUD hud = new PlayerHUD(screenG);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		bs.show();
 	}
 	public void run() {
@@ -93,20 +102,34 @@ public class Game extends JFrame implements Runnable{
 	    return a;
 	}
 	public static void main(String [] args) {
-		int[][] map= {{2,2,2,2,2,2,2}};
+		int[][]map= {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
 		
 		int index = 0;
-		while(index != 1000){
-			int[]add= {1,0,0,0,0,0,1};
+		while(index != 20){
+			int[]add= {1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1};
 
 			map=addElement(map,add);
 			
 			index++;
 		}
-		int[]add= {2,2,2,2,2,2,2};
+		int[]add2= {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1};
+
+		map=addElement(map,add2);
+		map=addElement(map,add2);
+
+		map=addElement(map,add2);
+
+		map=addElement(map,add2);
+		while(index != 50){
+			int[]add= {1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,1};
+
+			map=addElement(map,add);
+			
+			index++;
+		}
+		int[]add= {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 
 		map=addElement(map,add);
-
 		System.out.println(map[1][1]);
 		Game game = new Game(map);
 	}
