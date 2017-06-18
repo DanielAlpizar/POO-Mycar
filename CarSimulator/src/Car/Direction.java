@@ -2,39 +2,41 @@ package Car;
 
 import java.util.*;
 
-import Control.System;
-
-/**
- * 
- */
 public class Direction extends System {
+	
+	private boolean TurnLeft;
+	private boolean TurnRight;
+	private int Degrees;
 
-	/**
-	 * Default constructor
-	 */
 	public Direction() {
+		
+	}
+	
+	public boolean isTurnLeft() {
+		return TurnLeft;
 	}
 
-	/**
-	 * 
-	 */
-	private boolean turnLeft;
 
-	/**
-	 * 
-	 */
-	private boolean turnRight;
 
-	/**
-	 * 
-	 */
-	private int degrees;
+	public boolean isTurnRight() {
+		return TurnRight;
+	}
+	
 
-	/**
-	 * @param degrees
-	 */
-	public void turn(void degrees) {
-		// TODO implement here
+
+	public int getDegrees() {
+		return Degrees;
 	}
 
+	public void setDegrees(int degrees) {
+		Degrees = degrees;
+	}
+
+	public void turnLeft(boolean turnLeft){
+		TurnLeft=turnLeft;
+	}
+	
+	public void turnRight(boolean turnRight){
+		TurnRight=turnRight;
+	}
 }

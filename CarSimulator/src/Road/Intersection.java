@@ -3,6 +3,8 @@ package Road;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
+import Car.Obstacles;
+
 /**
  * 
  */
@@ -21,13 +23,15 @@ public class Intersection extends Obstacle {
 		}
 		count = count/4;
 		
-		
+		int[]add2= {4,4,4,4,4,4,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4};
+		map=build.addElement(map, add2);
+
 		if(count%2==0 ||  count ==0){
-			int[]add= {4,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4};
+			int[]add= {4,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4};
 
 			map=build.addElement(map, add);
 		}else{
-			int[]add= {4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,4};
+			int[]add= {4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,4};
 
 
 			map=build.addElement(map, add);
@@ -36,19 +40,19 @@ public class Intersection extends Obstacle {
 		
 		index=0;
 		while(index!=3){
-			int[]add= {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4};
+			int[]add= {4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4};
 
 			map=build.addElement(map, add);
 			index++;
 
 		}
 		if(count%2==0 ||  count ==0){
-			int[]add= {4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,4};
+			int[]add= {4,4,4,4,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,4};
 
 
 			map=build.addElement(map, add);
 		}else{
-			int[]add= {4,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4};
+			int[]add= {4,0,0,0,0,0,0,0,0,0,4,4,4,4,4,4,4,4,4,4,4,4};
 
 			map=build.addElement(map, add);
 		}

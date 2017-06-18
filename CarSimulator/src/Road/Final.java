@@ -3,6 +3,8 @@ package Road;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
+import Car.Obstacles;
+
 /**
  * 
  */

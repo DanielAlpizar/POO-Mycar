@@ -6,9 +6,24 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Texture {
-	public int[] pixels;
+	private int[] pixels;
 	private String loc;
-	public final int SIZE;
+	
+	
+	private final int SIZE;
+
+	public int[] getPixels() {
+		return pixels;
+	}
+
+	public void setPixels(int[] pixels) {
+		this.pixels = pixels;
+	}
+
+	public int getSIZE() {
+		return SIZE;
+	}
+
 	
 	public Texture(String location, int size) {
 		loc = location;
@@ -28,8 +43,5 @@ public class Texture {
 		}
 	}
 	
-	public static  Texture house = new Texture("house.jpg", 64);
-	public static   Texture house2 = new Texture("house2.jpg", 64);
-	public static   Texture brick = new Texture("brickwall.jpg", 64);
-	public static   Texture wood = new Texture("wood.jpg", 64);
+
 }

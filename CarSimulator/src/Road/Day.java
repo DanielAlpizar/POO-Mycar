@@ -3,6 +3,8 @@ package Road;
 import java.awt.image.BufferedImage;
 import java.util.*;
 
+import Car.Obstacles;
+
 /**
  * 
  */
@@ -19,12 +21,12 @@ public class Day extends Obstacle {
 		PistaTools build = new PistaTools();
 		
 		if (day) {
-			int[] add = { 10, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 10 };
+			int[]add= {10,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,10};
 			return map = build.addElement(map, add);
 
 		}
 		else{
-			int[] add = { 9, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 9 };
+			int[]add= {9,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,9};
 			return map = build.addElement(map, add);
 
 		}

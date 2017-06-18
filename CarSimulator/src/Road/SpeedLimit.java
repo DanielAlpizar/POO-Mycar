@@ -2,6 +2,8 @@ package Road;
 
 import java.util.*;
 
+import Car.Obstacles;
+
 /**
  * 
  */

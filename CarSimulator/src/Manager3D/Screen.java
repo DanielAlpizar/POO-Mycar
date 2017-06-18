@@ -39,11 +39,11 @@ public class Screen {
 		}
 		for (int x = 0; x < width; x = x + 1) {
 			double cameraX = 2 * x / (double) (width) - 1;
-			double rayDirX = camera.xDir + camera.xPlane * cameraX;
-			double rayDirY = camera.yDir + camera.yPlane * cameraX;
+			double rayDirX = camera.getxDir() + camera.getxPlane() * cameraX;
+			double rayDirY = camera.getyDir() + camera.getyPlane() * cameraX;
 			// Map position
-			int mapX = (int) camera.xPos;
-			int mapY = (int) camera.yPos;
+			int mapX = (int) camera.getxPos();
+			int mapY = (int) camera.getyPos();
 			// length of ray from current position to next x or y-side
 			double sideDistX;
 			double sideDistY;
@@ -58,17 +58,17 @@ public class Screen {
 			// Figure out the step direction and initial distance to a side
 			if (rayDirX < 0) {
 				stepX = -1;
-				sideDistX = (camera.xPos - mapX) * deltaDistX;
+				sideDistX = (camera.getxPos() - mapX) * deltaDistX;
 			} else {
 				stepX = 1;
-				sideDistX = (mapX + 1.0 - camera.xPos) * deltaDistX;
+				sideDistX = (mapX + 1.0 - camera.getxPos()) * deltaDistX;
 			}
 			if (rayDirY < 0) {
 				stepY = -1;
-				sideDistY = (camera.yPos - mapY) * deltaDistY;
+				sideDistY = (camera.getyPos() - mapY) * deltaDistY;
 			} else {
 				stepY = 1;
-				sideDistY = (mapY + 1.0 - camera.yPos) * deltaDistY;
+				sideDistY = (mapY + 1.0 - camera.getyPos()) * deltaDistY;
 			}
 			// Loop to find where the ray hits a wall
 			while (!hit) {
@@ -90,9 +90,9 @@ public class Screen {
 			}
 			// Calculate distance to the point of impact
 			if (side == 0)
-				perpWallDist = Math.abs((mapX - camera.xPos + (1 - stepX) / 2) / rayDirX);
+				perpWallDist = Math.abs((mapX - camera.getxPos() + (1 - stepX) / 2) / rayDirX);
 			else
-				perpWallDist = Math.abs((mapY - camera.yPos + (1 - stepY) / 2) / rayDirY);
+				perpWallDist = Math.abs((mapY - camera.getyPos() + (1 - stepY) / 2) / rayDirY);
 			// Now calculate the height of the wall based on the distance from
 			// the camera
 			int lineHeight;
@@ -111,32 +111,32 @@ public class Screen {
 			int texNum = map[mapX][mapY] - 1;
 			double wallX;// Exact position of where wall was hit
 			if (side == 1) {// If its a y-axis wall
-				wallX = (camera.xPos + ((mapY - camera.yPos + (1 - stepY) / 2) / rayDirY) * rayDirX);
+				wallX = (camera.getxPos() + ((mapY - camera.getyPos() + (1 - stepY) / 2) / rayDirY) * rayDirX);
 			} else {// X-axis wall
-				wallX = (camera.yPos + ((mapX - camera.xPos + (1 - stepX) / 2) / rayDirX) * rayDirY);
+				wallX = (camera.getyPos() + ((mapX - camera.getxPos() + (1 - stepX) / 2) / rayDirX) * rayDirY);
 			}
 			wallX -= Math.floor(wallX);
 			// x coordinate on the texture
-			int texX = (int) (wallX * (textures.get(texNum).SIZE));
+			int texX = (int) (wallX * (textures.get(texNum).getSIZE()));
 			if (side == 0 && rayDirX > 0)
-				texX = textures.get(texNum).SIZE - texX - 1;
+				texX = textures.get(texNum).getSIZE() - texX - 1;
 			if (side == 1 && rayDirY < 0)
-				texX = textures.get(texNum).SIZE - texX - 1;
+				texX = textures.get(texNum).getSIZE() - texX - 1;
 			// calculate y coordinate on texture
 			for (int y = drawStart; y < drawEnd; y++) {
 				int texY = (((y * 2 - height + lineHeight) << 6) / lineHeight) / 2;
 				int color;
 				if (side == 0)
-					color = textures.get(texNum).pixels[texX + (texY * textures.get(texNum).SIZE)];
+					color = textures.get(texNum).getPixels() [texX + (texY * textures.get(texNum).getSIZE())];
 				else
-					color = (textures.get(texNum).pixels[texX + (texY * textures.get(texNum).SIZE)] >> 1) & 8355711;// Make
+					color = (textures.get(texNum).getPixels() [texX + (texY * textures.get(texNum).getSIZE())] >> 1) & 8355711;// Make
 																													// y
 																													// sides
 																													// darker
 				pixels[x + y * (width)] = color;
 			}
 		}
-		Double posX = camera.xPos;
+		Double posX = camera.getxPos();
 		if(map[posX.intValue()][0]==9){
 			setSky(Color.black);
 		}
@@ -144,7 +144,7 @@ public class Screen {
 			setSky(Color.blue);
 		}
 		else if(map[posX.intValue()][0]==11){
-			setSky(Color.gray);
+			setSky(Color.darkGray);
 		}
 		return pixels;
 	}

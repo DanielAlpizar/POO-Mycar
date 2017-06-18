@@ -13,12 +13,20 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class PlayerHUD {
+import Tools.Observer;
+import Tools.Subject;
+
+public class PlayerHUD implements Observer {
 	int Speed = 0;
 	boolean direccionalright = false;
 	boolean direccionalleft = false;
-	boolean luz = true;
-	boolean escobillas = true;
+	boolean Lights = true;
+	boolean Windshield = true;
+	int MaxSpeed = 0;
+	int MinSpeed = 0;
+
+	private String name;
+	private Subject topic;
 	
 	public PlayerHUD(Graphics graphics) throws IOException {
 		Font font = new Font("Verdana", Font.BOLD, 12);
@@ -26,6 +34,19 @@ public class PlayerHUD {
 		String speedtext = "Speed:";
 		speedtext = speedtext + Speed;
 		graphics.drawString(speedtext, 10, 450);
+		
+		graphics.setFont(font);
+		String MinSpeedS = "Min Speed:";
+		MinSpeedS = MinSpeedS + MinSpeed;
+		graphics.drawString(MinSpeedS, 10, 470);
+		
+		graphics.setFont(font);
+		String MaxSpeedS = "Max Speed:";
+		MaxSpeedS = MaxSpeedS + MaxSpeed;
+		graphics.drawString(MaxSpeedS, 10, 460);
+		
+		
+		
 		if (direccionalright) {
 			BufferedImage img = ImageIO.read(new File("E://textures//arrowright.png"));
 			graphics.drawImage(img, 10, 400, 50, 50, null);
@@ -37,7 +58,7 @@ public class PlayerHUD {
 
 			graphics.drawImage(img, 580, 400, 50, 50, null);
 		}
-		if(luz){
+		if(Lights){
 			Graphics2D graphics2d = (Graphics2D)graphics;
 			float alpha = (float) 0.5; //draw half transparent
 			AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER,alpha);
@@ -48,5 +69,29 @@ public class PlayerHUD {
 			graphics= (Graphics)graphics2d;
 
 		}
+		if(Windshield){
+			
+		}
 	}
+
+
+
+	@Override
+	public void update(Object info) {
+		Car.System CarSystem  = (Car.System) info;
+		Speed=CarSystem.getMotor().getSpeed();
+		direccionalright=CarSystem.getElectric().isRightBlinker();
+		direccionalleft=CarSystem.getElectric().isLeftBlinker();
+		Lights=CarSystem.getElectric().isLights();
+		Windshield=CarSystem.getElectric().isWindshield();
+		MaxSpeed=CarSystem.getObstacles().getMaximumSpeed();
+		MinSpeed=CarSystem.getObstacles().getMinimumSpeed();
+		
+	}
+	public void setSubject(Subject sub) {
+		this.topic=sub;
+	}
+
+
+
 }

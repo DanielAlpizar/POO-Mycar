@@ -34,12 +34,12 @@ public class Control {
 		RoadObjects.chargeRoad(	roadfile);
 
 		PistaTools fabrica = new PistaTools();
-		System.out.println("si llego aqui");
 
 		int[][] map = fabrica.BuildRoad(RoadObjects.getItemsinroad());
-		System.out.println("si llego aqui");
+		Simulator sim = new Simulator();
 		Game game = new Game(map);
-	
+		sim.getSystem().register(game.getCamera());
+		game.getCamera().setSubject(sim.getSystem());
 	}
     public static void main(String[] args) {
 

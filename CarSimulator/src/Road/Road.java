@@ -3,6 +3,7 @@ package Road;
 import java.io.File;
 import java.util.*;
 
+import Car.Obstacles;
 import Tools.FileManager;
 
 /**

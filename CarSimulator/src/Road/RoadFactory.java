@@ -1,11 +1,13 @@
 package Road;
 
+import Car.Obstacles;
+
 public class RoadFactory {
 	public Obstacle getShape(String ObstacleType) {
 		if (ObstacleType == null) {
 			return null;
 		}
-		if (ObstacleType.equalsIgnoreCase("R")) {
+		if (ObstacleType.equalsIgnoreCase("L")) {
 			return new Rain();
 
 		} else if (ObstacleType.equalsIgnoreCase(".")) {
