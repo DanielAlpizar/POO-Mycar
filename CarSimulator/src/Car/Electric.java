@@ -1,118 +1,135 @@
 package Car;
 
 import java.util.*;
+import Tools.IConstants;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
-import Control.System;
-
-/**
- * 
- */
-public class Electric extends System {
-
-	/**
-	 * Default constructor
-	 */
+public class Electric extends System implements IConstants {
+	
+	private boolean Lights;
+	private boolean Windshield;
+	private boolean RightBlinker;
+	private boolean LeftBlinker;
+	private int TimeLightsNight;
+	private int TimeWindshield;
+	private long StartTime = 0;
+	private long StartTime2 = 0;
+	
 	public Electric() {
+		
+	}
+	
+	public boolean isLights() {
+		return Lights;
 	}
 
-	/**
-	 * 
-	 */
-	private boolean lights;
+	public void setLights(boolean lights) {
+		Lights = lights;
+	}
 
-	/**
-	 * 
-	 */
-	private boolean windshield;
+	public boolean isWindshield() {
+		return Windshield;
+	}
 
-	/**
-	 * 
-	 */
-	private boolean rightBlinker;
+	public void setWindshield(boolean windshield) {
+		Windshield = windshield;
+	}
 
-	/**
-	 * 
-	 */
-	private boolean leftBlinker;
+	public boolean isRightBlinker() {
+		return RightBlinker;
+	}
 
-	/**
-	 * 
-	 */
-	private int timeLightsNight;
+	public void setRightBlinker(boolean rightBlinker) {
+		RightBlinker = rightBlinker;
+	}
 
-	/**
-	 * 
-	 */
-	private int timeWindshield;
+	public boolean isLeftBlinker() {
+		return LeftBlinker;
+	}
 
-	/**
-	 * 
-	 */
+	public void setLeftBlinker(boolean leftBlinker) {
+		LeftBlinker = leftBlinker;
+	}
+
+	public int getTimeLightsNight() {
+		return TimeLightsNight;
+	}
+
+	public void setTimeLightsNight(int timeLightsNight) {
+		TimeLightsNight = timeLightsNight;
+	}
+
+	public int getTimeWindshield() {
+		return TimeWindshield;
+	}
+	
+	public void setTimeWindshield(int timeWindshield) {
+		TimeWindshield = timeWindshield;
+	}
+
 	public void turnOnLights() {
-		// TODO implement here
+		if(Lights == false){
+			Lights = true;
+		}
 	}
 
-	/**
-	 * 
-	 */
 	public void turnOffLights() {
-		// TODO implement here
+		if(Lights){
+			Lights = false;
+		}
 	}
 
-	/**
-	 * 
-	 */
 	public void turnOnRightBlinker() {
-		// TODO implement here
+		if(RightBlinker == false){
+			RightBlinker = true;
+		}
 	}
 
-	/**
-	 * 
-	 */
 	public void turnOffRightBlinker() {
-		// TODO implement here
+		RightBlinker = false;
 	}
 
-	/**
-	 * 
-	 */
 	public void turnOnLeftBlinker() {
-		// TODO implement here
+		if(LeftBlinker == false){
+			LeftBlinker = true;
+		}
 	}
 
-	/**
-	 * 
-	 */
 	public void turnOffLeftBlinker() {
-		// TODO implement here
+		if(LeftBlinker){
+			LeftBlinker = false;
+		}
 	}
 
-	/**
-	 * 
-	 */
 	public void turnOnWindshield() {
-		// TODO implement here
+		if(Windshield == false){
+			Windshield = true;
+		}
 	}
 
-	/**
-	 * 
-	 */
 	public void turnOffWindshield() {
-		// TODO implement here
+		if(Windshield){
+			Windshield = false;
+		}
 	}
 
-	/**
-	 * 
-	 */
 	public void calculateTimeLights() {
-		// TODO implement here
+		if(this.Lights == false){
+			this.StartTime = new Date().getTime();
+		}else{
+			long endTime = new Date().getTime();
+			this.TimeLightsNight = (int)((endTime - StartTime) * MILISEC_TO_SEC);
+		}
 	}
 
-	/**
-	 * 
-	 */
 	public void calculateTimeWindshield() {
-		// TODO implement here
+		if(this.Windshield == false){
+			this.StartTime2 = new Date().getTime();
+		}else{
+			long endTime = new Date().getTime();
+			this.TimeLightsNight = (int)((endTime - StartTime2) * MILISEC_TO_SEC);
+		}
 	}
 
 }

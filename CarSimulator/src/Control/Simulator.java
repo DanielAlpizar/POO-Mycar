@@ -1,120 +1,70 @@
 package Control;
 
 import java.util.*;
+import Car.System;
 
-/**
- * 
- */
 public class Simulator {
+	
+	System system = new System();
 
-    /**
-     * Default constructor
-     */
     public Simulator() {
+    	
     }
 
-
-
-
-
-
-
-    /**
-     * 
-     */
     public void start() {
-        // TODO implement here
+    	system.start();
     }
-
-    /**
-     * @param velocidad
-     */
-    public void accelerate(void velocidad) {
-        // TODO implement here
+    
+    public void accelerate(int speed) {
+    	
     }
-
-    /**
-     * @param velocidad
-     */
-    public void break(void velocidad) {
-        // TODO implement here
+    
+    public void breack(int speed) {
+    	
     }
-
-    /**
-     * @param grados
-     */
-    public void turnRight(void grados) {
-        // TODO implement here
+    
+    public void turnRight(int degrees) {
+    	
     }
-
-    /**
-     * @param grados
-     */
-    public void turnLeft(void grados) {
-        // TODO implement here
+    
+    public void turnLeft(int degrees) {
+    	
     }
-
-    /**
-     * 
-     */
+    
     public void turnOnLights() {
-        // TODO implement here
+    	
     }
-
-    /**
-     * 
-     */
+    
     public void turnOffLights() {
-        // TODO implement here
+    	
     }
-
-    /**
-     * 
-     */
+    
     public void turnOnRightBlinker() {
-        // TODO implement here
+    	
     }
-
-    /**
-     * 
-     */
+    
     public void turnOffRightBlinker() {
-        // TODO implement here
+    	
     }
-
-    /**
-     * 
-     */
+    
     public void turnOnLeftBlinker() {
-        // TODO implement here
+    	
     }
-
-    /**
-     * 
-     */
+    
     public void turnOffLeftBlinker() {
-        // TODO implement here
+    	
     }
-
-    /**
-     * 
-     */
+    
     public void turnOnWndshield() {
-        // TODO implement here
+    	
     }
-
-    /**
-     * 
-     */
+    
     public void turnOffWindshield() {
-        // TODO implement here
+    	
     }
-
-    /**
-     * @param marcha
-     */
-    public void changeGear(void marcha) {
-        // TODO implement here
+    
+    public void changeGear(int gear) {
+    	
     }
 
 }

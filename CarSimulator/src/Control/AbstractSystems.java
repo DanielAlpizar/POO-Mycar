@@ -2,50 +2,25 @@ package Control;
 
 import java.util.*;
 
-/**
- * 
- */
 public class AbstractSystems {
 
-	/**
-	 * Default constructor
-	 */
 	public AbstractSystems() {
 	}
 
-	/**
-	 * 
-	 */
 	public void startSimulation() {
-		// TODO implement here
+		
 	}
 
-	/**
-	 * @param speed
-	 * @param degrees
-	 * @param gear
-	 */
-	public void reportNavegation(void speed, void degrees, void gear) {
-		// TODO implement here
+	public void reportNavegation(int speed, int degrees, int gear) {
+		
 	}
-
-	/**
-	 * @param statusRightBlinker
-	 * @param statusLeftBlinker
-	 * @param statusWindshield
-	 * @param statusLight
-	 */
-	public void reportDash(void statusRightBlinker, void statusLeftBlinker, void statusWindshield, void statusLight) {
-		// TODO implement here
+	
+	public void reportDash(boolean statusRightBlinker, boolean statusLeftBlinker, boolean statusWindshield, boolean statusLight) {
+		
 	}
-
-	/**
-     * 
-     */
-    public void ArrayList
-
-	getStatusSystem() {
-        // TODO implement here
+    public ArrayList getStatusSystem() {
+		return null;
+    	
     }
 
 }
