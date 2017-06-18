@@ -37,7 +37,7 @@ public class Road {
 					interindex++;
 					inletter = Textroad.charAt(indexletter + interindex);
 				}
-				speed += Character.toString(inletter);
+				//speed += Character.toString(inletter);
 
 				SpeedLimit speedlimit = (SpeedLimit) factory.getShape("S");
 				if (Character.toString(letter).equals("m")) {

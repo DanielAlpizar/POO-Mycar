@@ -137,13 +137,13 @@ public class Screen {
 			}
 		}
 		Double posX = camera.getxPos();
-		if(map[posX.intValue()][0]==9){
+		if(map[posX.intValue()][0]==3){
 			setSky(Color.black);
 		}
-		else if(map[posX.intValue()][0]==10){
+		else if(map[posX.intValue()][0]==2){
 			setSky(Color.blue);
 		}
-		else if(map[posX.intValue()][0]==11){
+		else if(map[posX.intValue()][0]==5){
 			setSky(Color.darkGray);
 		}
 		return pixels;

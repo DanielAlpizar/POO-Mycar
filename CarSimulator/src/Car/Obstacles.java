@@ -4,15 +4,14 @@ import java.util.*;
 
 import Road.PistaTools;
 
-public class Obstacles extends System {
+public class Obstacles {
 
-	private boolean Day;
-	private int MaximumSpeed;
-	private int MinimumSpeed;
+	private boolean Day=true;
+	private int MaximumSpeed=60;
+	private int MinimumSpeed=0;
 	private boolean Rain;
 	
-	public Obstacles() {
-	}
+
 
 	public boolean isDay() {
 		return Day;

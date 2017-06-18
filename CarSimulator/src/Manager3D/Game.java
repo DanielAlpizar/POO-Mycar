@@ -11,7 +11,19 @@ import java.util.Arrays;
 
 import javax.swing.JFrame;
 
+import Control.Evaluator;
+import Control.Simulator;
+
 public class Game extends JFrame implements Runnable {
+
+	public static int[][] getMap() {
+		return map;
+	}
+
+	public static void setMap(int[][] map) {
+		Game.map = map;
+	}
+
 
 	private static int[][] map;
 
@@ -24,20 +36,22 @@ public class Game extends JFrame implements Runnable {
 	private ArrayList<Texture> textures;
 	private Camera camera;
 	private Screen screen;
+	private Dash hud = new Dash();
+	public Dash getHud() {
+		return hud;
+	}
+
+
 	private Texture house = new Texture("house.jpg", 64);
 	private Texture house2 = new Texture("house2.jpg", 64);
-	private Texture brick = new Texture("brickwall.jpg", 64);
+	private Texture brick = new Texture("brickwall2.jpg", 64);
+	
 	private Texture wood = new Texture("wood.jpg", 64);
+	private Texture wood2 = new Texture("wood2.jpg", 64);
+	private Texture brick2 = new Texture("brickwall.jpg", 64);
 
-	public Camera getCamera() {
-		return camera;
-	}
+	public Game(int[][] bmap,Simulator sim) {
 
-	public void setCamera(Camera camera) {
-		this.camera = camera;
-	}
-
-	public Game(int[][] bmap) {
 		map = bmap;
 		thread = new Thread(this);
 		image = new BufferedImage(640, 480, BufferedImage.TYPE_INT_RGB);
@@ -45,22 +59,15 @@ public class Game extends JFrame implements Runnable {
 		textures = new ArrayList<Texture>();
 		textures.add(house);
 		textures.add(brick);
+		textures.add(brick2);
+
 		textures.add(house2);
 		textures.add(wood);
-		textures.add(wood);
-		textures.add(wood);
-		textures.add(wood);
-		textures.add(wood);
-		textures.add(wood);
-		textures.add(wood);
-		textures.add(wood);
-		textures.add(wood);
-		textures.add(wood);
-		textures.add(wood);
-		textures.add(wood);
+		textures.add(wood2);
 
-		camera = new Camera(2, 2, 1, 0, 0, -.66);
+		camera = new Camera(2, 10, 1, 0, 0, -.66);
 		screen = new Screen(map, mapWidth, mapHeight, textures, 640, 480);
+		addKeyListener(sim);
 		setSize(640, 480);
 		setResizable(false);
 		setTitle("Car Simulator");
@@ -68,7 +75,7 @@ public class Game extends JFrame implements Runnable {
 		setBackground(Color.blue);
 		setLocationRelativeTo(null);
 		setVisible(true);
-		start();
+		//start();
 	}
 
 	private synchronized void start() {
@@ -94,17 +101,13 @@ public class Game extends JFrame implements Runnable {
 		Graphics screenG = bs.getDrawGraphics();
 
 		screenG.drawImage(image, 0, 0, image.getWidth(), image.getHeight(), null);
-		try {
-			PlayerHUD hud = new PlayerHUD(screenG);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		hud.setGraphics(screenG);
+		hud.render();
 		bs.show();
 	}
 
 	public void run() {
+		running = true;
 		long lastTime = System.nanoTime();
 		final double ns = 1000000000.0 / 60.0;// 60 times per second
 		double delta = 0;
@@ -113,6 +116,7 @@ public class Game extends JFrame implements Runnable {
 			long now = System.nanoTime();
 			delta = delta + ((now - lastTime) / ns);
 			lastTime = now;
+			
 			while (delta >= 1)// Make sure update is only happening 60 times a
 								// second
 			{
@@ -125,42 +129,26 @@ public class Game extends JFrame implements Runnable {
 		}
 	}
 
+	public Screen getScreen() {
+		return screen;
+	}
+
+	public void setScreen(Screen screen) {
+		this.screen = screen;
+	}
+
 	static int[][] addElement(int[][] a, int[] add) {
 		a = Arrays.copyOf(a, a.length + 1);
 		a[a.length - 1] = add;
 		return a;
 	}
 
-	public static void main(String[] args) {
-		int[][] map = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
-
-		int index = 0;
-		while (index != 20) {
-			int[] add = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-
-			map = addElement(map, add);
-
-			index++;
-		}
-		int[] add2 = { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
-
-		map = addElement(map, add2);
-		map = addElement(map, add2);
-
-		map = addElement(map, add2);
-
-		map = addElement(map, add2);
-		while (index != 50) {
-			int[] add = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1 };
-
-			map = addElement(map, add);
-
-			index++;
-		}
-		int[] add = { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-
-		map = addElement(map, add);
-		System.out.println(map[1][1]);
-		Game game = new Game(map);
+	public Camera getCamera() {
+		return camera;
 	}
+
+	public void setCamera(Camera camera) {
+		this.camera = camera;
+	}
+
 }

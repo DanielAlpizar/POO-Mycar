@@ -2,15 +2,16 @@ package Manager3D;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import Tools.Observer;
 import Tools.Subject;
 
 
 public class Camera implements Observer{
-	private double xPos, yPos, xDir, yDir, xPlane, yPlane;
-	private boolean left, right, forward=true, back;
-	private  double MOVE_SPEED = .8;
+	private double xPos=4, yPos, xDir, yDir, xPlane, yPlane;
+	private boolean left=false, right=false, forward=true, back;
+	private  double MOVE_SPEED = 0;
 	private  double ROTATION_SPEED = .02;
 	private String name;
 	private Subject topic;
@@ -123,10 +124,12 @@ public class Camera implements Observer{
 	}
 	@Override
 	public void update(Object info) {
-		Car.System CarSystem  = (Car.System) info;
-		MOVE_SPEED=CarSystem.getMotor().getSpeed()*0.5;
-		left=CarSystem.getMotor().getDirection().isTurnLeft();
-		right=CarSystem.getMotor().getDirection().isTurnRight();
+		Car.CarSystem CarSystem  = (Car.CarSystem) info;
+		ArrayList infoarray= CarSystem.returnActualValues();
+		MOVE_SPEED=((int) infoarray.get(3)*0.009);
+		left=(boolean) infoarray.get(5);
+		right=(boolean) infoarray.get(6);
+
 	}
 	@Override
 	public void setSubject(Subject sub) {

@@ -16,7 +16,7 @@ public class Rain extends Obstacle {
 	 */
 	public int[][] Build(int[][] map){
 		PistaTools build = new PistaTools();
-		int[]add= {11,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,11};
+		int[]add= {5,5,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,5,5};
 			return map=build.addElement(map, add);
 
 

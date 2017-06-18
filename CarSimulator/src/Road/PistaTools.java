@@ -19,7 +19,7 @@ public class PistaTools {
 	}
 
 	public int[][] BuildRoad(ArrayList<Obstacle> itemsinroad) {
-		int[][] map = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 } };
+		int[][] map = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ,1,1,1,1,1} };
 
 		int index = 0;
 		while (index != itemsinroad.size()) {

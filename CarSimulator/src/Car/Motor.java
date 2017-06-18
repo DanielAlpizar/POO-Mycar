@@ -4,16 +4,16 @@ import java.util.*;
 import Tools.IConstants;
 import Tools.ThreadManager;
 
-public class Motor extends System implements IConstants, Runnable {
+public class Motor   implements IConstants, Runnable {
 	
-	private int Gear;
-    private int Speed;
-    private int Revolutions;
-    private int RevolutionsTime;
+	private int Gear=0;
+    private int Speed=0;
+    private int Revolutions=0;
+    private int RevolutionsTime=0;
     private long StartTime = 0;
     private int FactorAceleracion = 1;
     private int CiclosAceleracion = 0;
-
+    private CarSystem system;
    // public Motor() {
     	
    // }
@@ -61,20 +61,27 @@ public class Motor extends System implements IConstants, Runnable {
 	public void accelerate() { // estudiar synchronized 
 		
     	FactorAceleracion = 1;
-    	ThreadManager.getInstance().getExecutor().execute(this);
     }
 
     public void decelerate() {
     	FactorAceleracion = -1; 
-    	ThreadManager.getInstance().getExecutor().execute(this);
+
     }
     
     public void breack() {
     	FactorAceleracion = -2;
-    	ThreadManager.getInstance().getExecutor().execute(this);
+
     }
     
-    public void gearChange(int pGear) {
+    public int getFactorAceleracion() {
+		return FactorAceleracion;
+	}
+
+	public void setFactorAceleracion(int factorAceleracion) {
+		FactorAceleracion = factorAceleracion;
+	}
+
+	public void gearChange(int pGear) {
     	this.Gear = pGear;
     }
     
@@ -90,14 +97,30 @@ public class Motor extends System implements IConstants, Runnable {
 			this.RevolutionsTime = (int)((endTime - StartTime) * MILISEC_TO_SEC);
 		}
     }
-    
-    public void run() {
-	    try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
+
+    public void setSystem(CarSystem system) {
+		this.system = system;
+	}
+
+	public void run() {
+
+		while(true){
+
+			Speed += (KM_POR_SEC * FactorAceleracion);
+			system.notifyObservers();
+			system.setChanged(true);
+	    	if(Speed<=0){
+	    		Speed=0;
+	    		FactorAceleracion=0;
+	    	}
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}
+
 		}
-	    this.Speed += (KM_POR_SEC * FactorAceleracion);
 	    // falta hacer el ajuste por si se hace negativo o supera la velocidad maxima del carro, constantes
     }
 

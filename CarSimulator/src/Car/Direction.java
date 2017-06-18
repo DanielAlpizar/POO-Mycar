@@ -2,7 +2,7 @@ package Car;
 
 import java.util.*;
 
-public class Direction extends System {
+public class Direction  {
 	
 	private boolean TurnLeft;
 	private boolean TurnRight;

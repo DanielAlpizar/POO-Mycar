@@ -16,7 +16,7 @@ public class Final extends Obstacle {
 	 */
 	public int[][] Build(int[][] map){
 		PistaTools build = new PistaTools();
-		int[]add= {4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4};
+		int[]add= {6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6};
 		return map=build.addElement(map, add);
 	}
 

@@ -5,7 +5,7 @@ import Tools.IConstants;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class Electric extends System implements IConstants {
+public class Electric implements IConstants {
 	
 	private boolean Lights;
 	private boolean Windshield;

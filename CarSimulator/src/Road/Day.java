@@ -21,12 +21,12 @@ public class Day extends Obstacle {
 		PistaTools build = new PistaTools();
 		
 		if (day) {
-			int[]add= {10,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,10};
+			int[]add= {2,2,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,2,2};
 			return map = build.addElement(map, add);
 
 		}
 		else{
-			int[]add= {9,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,9};
+			int[]add= {3,3,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,3,3};
 			return map = build.addElement(map, add);
 
 		}

@@ -1,154 +1,144 @@
 package Control;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.*;
-import Car.System;
+import Car.CarSystem;
+import Car.Obstacles;
+import Manager3D.Game;
 import Tools.Observer;
 import Tools.Subject;
 
-public class Simulator implements KeyListener {
+public class Simulator implements KeyListener, Runnable {
 
-	System system = new System();
-
-	private boolean accelerate;
+	private CarSystem system = new CarSystem();
+	private Game game;
 	private boolean left;
+	private Evaluator evaluator = new Evaluator();
 	private boolean right;
 	private boolean breack;
 
-	public void keyPressed(KeyEvent key) {
-		if ((key.getKeyCode() == KeyEvent.VK_LEFT))
-			system.getMotor().getDirection().turnLeft(true);
-		if ((key.getKeyCode() == KeyEvent.VK_RIGHT))
-			system.getMotor().getDirection().turnRight(true);
+	public Simulator() {
 
-		if ((key.getKeyCode() == KeyEvent.VK_UP))
-			accelerate = true;
-		while (accelerate) {
-			system.getMotor().accelerate();
-		}
-		if ((key.getKeyCode() == KeyEvent.VK_DOWN))
-			while (accelerate) {
-				system.getMotor().breack();
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	public void run() {
+		evaluator.setGame(game);
+
+		evaluator.setSystem(system);
+		while (true) {
+			if (game.getScreen().getSky() == Color.BLACK) {
+				system.getObstacles().showDay(false);
+			} else if (game.getScreen().getSky() == Color.blue) {
+				system.getObstacles().showDay(true);
 			}
-		
-		if ((key.getKeyCode() == KeyEvent.VK_NUMPAD0)){
-			if(!system.getElectric().getElectric().isLights()){
+			if (game.getScreen().getSky() == Color.gray) {
+				system.getObstacles().showRain(true);
+			} else {
+				system.getObstacles().showRain(false);
+
+			}
+
+			try {
+				evaluator.evaluate();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public void keyPressed(KeyEvent key) {
+
+		if ((key.getKeyCode() == KeyEvent.VK_LEFT))
+			system.getDirection().turnLeft(true);
+
+		if ((key.getKeyCode() == KeyEvent.VK_RIGHT))
+			system.getDirection().turnRight(true);
+		if ((key.getKeyCode() == KeyEvent.VK_UP)) {
+			system.getMotor().accelerate();
+
+		}
+		if ((key.getKeyCode() == KeyEvent.VK_DOWN)) {
+			system.getMotor().breack();
+
+		}
+
+		if ((key.getKeyCode() == KeyEvent.VK_NUMPAD0)) {
+			if (!system.getElectric().isLights()) {
 				system.getElectric().setLights(true);
-			}else{
+			} else {
 				system.getElectric().setLights(false);
 
 			}
 		}
-		if ((key.getKeyCode() == KeyEvent.VK_NUMPAD1)){
-			if(!system.getElectric().getElectric().isLeftBlinker()){
+		if ((key.getKeyCode() == KeyEvent.VK_NUMPAD1)) {
+			if (!system.getElectric().isLeftBlinker()) {
 				system.getElectric().setLeftBlinker(true);
-			}else{
+			} else {
 				system.getElectric().setLeftBlinker(false);
 
 			}
 		}
-		if ((key.getKeyCode() == KeyEvent.VK_NUMPAD1)){
-			if(!system.getElectric().getElectric().isRightBlinker()){
+		if ((key.getKeyCode() == KeyEvent.VK_NUMPAD2)) {
+			if (!system.getElectric().isRightBlinker()) {
 				system.getElectric().setRightBlinker(true);
-			}else{
+			} else {
 				system.getElectric().setRightBlinker(false);
 
 			}
 		}
-			
-			if ((key.getKeyCode() == KeyEvent.VK_NUMPAD3)){
-				if(!system.getElectric().getElectric().isWindshield()){
-					system.getElectric().setWindshield(true);
-				}else{
-					system.getElectric().setWindshield(false);
 
-				}
+		if ((key.getKeyCode() == KeyEvent.VK_NUMPAD3)) {
+			if (!system.getElectric().isWindshield()) {
+				system.getElectric().setWindshield(true);
+			} else {
+				system.getElectric().setWindshield(false);
+
+			}
 		}
 
-		
-		
-		
-		
+		if ((key.getKeyCode() == KeyEvent.VK_ENTER)) {
+			system.start();
+		}
+
+		system.setChanged(true);
+		system.notifyObservers();
+
 	}
 
-	public System getSystem() {
+	public CarSystem getSystem() {
 		return system;
 	}
 
 	public void keyReleased(KeyEvent key) {
 		if ((key.getKeyCode() == KeyEvent.VK_LEFT))
-			system.getMotor().getDirection().turnLeft(false);
+			system.getDirection().turnLeft(false);
 		if ((key.getKeyCode() == KeyEvent.VK_RIGHT))
-			system.getMotor().getDirection().turnRight(false);
+			system.getDirection().turnRight(false);
 		if ((key.getKeyCode() == KeyEvent.VK_UP))
-			accelerate=false;
+			system.getMotor().decelerate();
+
 		if ((key.getKeyCode() == KeyEvent.VK_DOWN))
 			breack = false;
+		system.setChanged(true);
+		system.notifyObservers();
+
 	}
 
 	public void start() {
 		system.start();
 	}
 
-	public void accelerate(int speed) {
-
-	}
-
-	public void breack(int speed) {
-
-	}
-
-	public void turnRight(int degrees) {
-
-	}
-
-	public void turnLeft(int degrees) {
-
-	}
-
-	public void turnOnLights() {
-
-	}
-
-	public void turnOffLights() {
-
-	}
-
-	public void turnOnRightBlinker() {
-
-	}
-
-	public void turnOffRightBlinker() {
-
-	}
-
-	public void turnOnLeftBlinker() {
-
-	}
-
-	public void turnOffLeftBlinker() {
-
-	}
-
-	public void turnOnWndshield() {
-
-	}
-
-	public void turnOffWindshield() {
-
-	}
-
-	public void changeGear(int gear) {
-
-	}
-
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
 
 }

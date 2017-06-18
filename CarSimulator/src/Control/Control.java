@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import Manager3D.Game;
 import Road.PistaTools;
 import Road.Road;
+import Tools.ThreadManager;
 import UI.MenuRoad;
 
 /**
@@ -37,13 +38,22 @@ public class Control {
 
 		int[][] map = fabrica.BuildRoad(RoadObjects.getItemsinroad());
 		Simulator sim = new Simulator();
-		Game game = new Game(map);
+		Game game = new Game(map,sim);
+
 		sim.getSystem().register(game.getCamera());
 		game.getCamera().setSubject(sim.getSystem());
+		sim.getSystem().register(game.getHud());
+		game.getHud().setSubject(sim.getSystem());
+		ThreadManager.getInstance().getExecutor().execute(game);
+		sim.setGame(game);
+
+		ThreadManager.getInstance().getExecutor().execute(sim);
+
 	}
     public static void main(String[] args) {
 
-    	Control Control = new Control();
+    	@SuppressWarnings("unused")
+		Control Control = new Control();
         
     }
 
