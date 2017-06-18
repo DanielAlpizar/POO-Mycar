@@ -25,6 +25,8 @@ public class Dash implements Observer {
 	boolean Windshield = false;
 	int MaxSpeed = 0;
 	int MinSpeed = 0;
+	int gear = 0;
+
 	int Points= 100;
 	private Graphics graphics;
 	private String name;
@@ -36,6 +38,13 @@ public class Dash implements Observer {
 		String speedtext = "Speed:";
 		speedtext = speedtext + Speed;
 		graphics.drawString(speedtext, 10, 450);
+		
+		
+		graphics.setFont(font);
+		String GearS = "Gear:";
+		GearS = GearS + gear;
+		graphics.drawString(GearS, 100, 470);
+		
 		
 		graphics.setFont(font);
 		String MinSpeedS = "Min Speed:";
@@ -107,6 +116,8 @@ public class Dash implements Observer {
 		Points =CarSystem.getPoints();
 		ArrayList infoarray= CarSystem.returnActualValues();
 		Speed=(int) infoarray.get(3);
+		gear=(int)infoarray.get(0);
+
 		direccionalright=(boolean) infoarray.get(10);
 		direccionalleft=(boolean) infoarray.get(11);
 		Lights=(boolean) infoarray.get(9);

@@ -75,16 +75,23 @@ public class Evaluator implements IConstants {
 
 			else if(game.getMap()[posX.intValue()][0]==4&&(int) system.returnActualValues().get(3)>10){
 				actualScore -= LOST_POINTS;
-				Thread.sleep(15000);
+				Thread.sleep(5000);
+
+			}
+			else if(game.getMap()[posX.intValue()][3]==6){
+				GameOver over = new GameOver(actualScore);
+				over.setVisible(true);
+
 
 			}
 		}
 		system.setPoints(actualScore);
 		if (actualScore == 0) {
 			game.dispose();
-			GameOver over = new GameOver();
+			GameOver over = new GameOver(actualScore);
 			over.setVisible(true);
 		}
+		
 	}
 
 	public void setGame(Game game) {

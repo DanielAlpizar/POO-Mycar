@@ -3,15 +3,23 @@ package Control;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
 import java.util.*;
 import Car.CarSystem;
 import Car.Obstacles;
 import Manager3D.Game;
+import Tools.Controller;
+import Tools.Frame;
+import Tools.Hand;
+import Tools.LeapListener;
 import Tools.Observer;
 import Tools.Subject;
+import com.leapmotion.leap.*;
+import com.leapmotion.leap.Gesture.State;
 
-public class Simulator implements KeyListener, Runnable {
+public class Simulator implements KeyListener,  Listener, Runnable {
 
+	
 	private CarSystem system = new CarSystem();
 	private Game game;
 	private boolean left;
@@ -20,7 +28,7 @@ public class Simulator implements KeyListener, Runnable {
 	private boolean breack;
 
 	public Simulator() {
-
+		
 	}
 
 	public void setGame(Game game) {
@@ -53,6 +61,7 @@ public class Simulator implements KeyListener, Runnable {
 		}
 	}
 
+	
 	public void keyPressed(KeyEvent key) {
 
 		if ((key.getKeyCode() == KeyEvent.VK_LEFT))
@@ -68,7 +77,14 @@ public class Simulator implements KeyListener, Runnable {
 			system.getMotor().breack();
 
 		}
+		if ((key.getKeyCode() == KeyEvent.VK_NUMPAD7)) {
+			system.getMotor().setGear(system.getMotor().getGear()+1);
 
+		}
+		if ((key.getKeyCode() == KeyEvent.VK_NUMPAD4)) {
+			system.getMotor().setGear(system.getMotor().getGear()-1);
+
+		}
 		if ((key.getKeyCode() == KeyEvent.VK_NUMPAD0)) {
 			if (!system.getElectric().isLights()) {
 				system.getElectric().setLights(true);
@@ -139,6 +155,49 @@ public class Simulator implements KeyListener, Runnable {
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void onInit(Controller controller){
+		System.out.println("Iniciaizado");
+	}
+	
+	public void onConnect(Controller controller){
+		System.out.println("Conectado a Motion Sensor");
+		controller.enableGesture(Gesture.Type.TYPE_SWIPE);
+		controller.enableGesture(Gesture.Type.TYPE_CIRCLE);
+		controller.enableGesture(Gesture.Type.TYPE_KEY_TAP);
+		controller.enableGesture(Gesture.Type.TYPE_SCREEN_TAP);
+	}
+	
+	public void onDisconnect(Controller controller){
+		System.out.println("Motion Sensor desconectado");
+	}
+	
+	public void onExit(Controller controller){
+		System.out.println("Exited");
+	}
+	
+	public void onFrame(Controller controller){
+		Frame frame = controller.frame();
+		for(Hand hand : frame.hands()){
+			String handType = hand.isLeft() ? "Left Hand" : "Right Hand";
+			if(frame.hands().count() == 1){
+				if(hand.direction().getX() < -0.5){
+					system.getDirection().turnLeft(true);
+					system.getMotor().accelerate();
+
+
+				}else if(hand.direction().getX() >= -0.5  && hand.direction().getX() <= 0.5 ){
+					system.getMotor().accelerate();
+
+				}else if(hand.direction().getX() > 0.5){
+					system.getDirection().turnRight(true);
+					system.getMotor().accelerate();
+				}
+			}else if(frame.hands().count() == 2){
+				system.getMotor().breack();
+			}
+		}	
 	}
 
 }

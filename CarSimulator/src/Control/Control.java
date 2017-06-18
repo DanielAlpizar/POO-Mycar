@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import Manager3D.Game;
 import Road.PistaTools;
 import Road.Road;
+import Tools.LeapListener;
 import Tools.ThreadManager;
 import UI.MenuRoad;
 
@@ -32,6 +33,12 @@ public class Control {
 	 * 
 	 */
 	public void start(File roadfile){
+		
+		
+
+		
+		
+		
 		RoadObjects.chargeRoad(	roadfile);
 
 		PistaTools fabrica = new PistaTools();
@@ -48,7 +55,24 @@ public class Control {
 		sim.setGame(game);
 
 		ThreadManager.getInstance().getExecutor().execute(sim);
+		
+		
+		
+		
+		LeapListener listener = new LeapListener();
+		
 
+		Controller controller = new Controller();
+		controller.addListener(sim);
+
+		try{
+			System.in.read();
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+
+		controller.removeListener(listener);
+		
 	}
     public static void main(String[] args) {
 
